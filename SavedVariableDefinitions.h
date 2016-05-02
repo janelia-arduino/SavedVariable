@@ -35,12 +35,47 @@ SavedVariable::SavedVariable(const ConstantString &name,
   array_length_ = array_length;
 }
 
+template<typename T>
+int SavedVariable::getDefaultValue(T &value)
+{
+  int i = 0;
+  if (sizeof(value) == size_)
+  {
+    byte* p = (byte*)(void*)&value;
+    byte* q = (byte*)(void*)default_value_ptr_;
+    for (i = 0; i < size_; i++)
+    {
+      *p++ = *q++;
+    }
+  }
+  return i;
+}
+
+template<typename T>
+int SavedVariable::getDefaultValue(T value[], unsigned int array_index)
+{
+  int i = 0;
+  if (array_index < array_length_)
+  {
+    byte* p = (byte*)(void*)&value[array_index];
+    byte* q = (byte*)(void*)default_value_ptr_ + array_index*array_element_size_;
+    for (i = 0; i < array_element_size_; i++)
+    {
+      if (i < size_)
+      {
+        *p++ = *q++;
+      }
+    }
+  }
+  return i;
+}
+
 #ifndef ARDUINO_SAM_DUE
 template<typename T>
 int SavedVariable::setValue(const T &value)
 {
   int i = 0;
-  if ((sizeof(value) == size_) && (array_length_ == 0))
+  if (sizeof(value) == size_)
   {
     const byte* p = (const byte*)(const void*)&value;
     int ee = eeprom_index_;
@@ -88,11 +123,10 @@ template<typename T>
 int SavedVariable::getValue(T &value)
 {
   int i = 0;
-  if ((sizeof(value) == size_) && (array_length_ == 0))
+  if (sizeof(value) == size_)
   {
     byte* p = (byte*)(void*)&value;
     int ee = eeprom_index_;
-    int i;
     for (i = 0; i < size_; i++)
     {
       *p++ = EEPROM.read(ee++);
@@ -138,38 +172,13 @@ int SavedVariable::setValue(const T value[], const unsigned int array_index)
 template<typename T>
 int SavedVariable::getValue(T &value)
 {
-  int i = 0;
-  if ((sizeof(value) == size_) && (array_length_ == 0))
-  {
-    byte* p = (byte*)(void*)&value;
-    byte* q = (byte*)(void*)default_value_ptr_;
-    int i;
-    for (i = 0; i < size_; i++)
-    {
-      *p++ = *q++;
-    }
-  }
-  return i;
+  return getDefaultValue(value);
 }
 
 template<typename T>
 int SavedVariable::getValue(T value[], unsigned int array_index)
 {
-  int i = 0;
-  if (array_index < array_length_)
-  {
-    byte* p = (byte*)(void*)&value[array_index];
-    T (*default_array)[array_length_] = (T (*)[array_length_])default_value_ptr_;
-    byte* q = (byte*)(void*)&default_array[array_index];
-    for (i = 0; i < array_element_size_; i++)
-    {
-      if (i < size_)
-      {
-        *p++ = *q++;
-      }
-    }
-  }
-  return i;
+  return getDefaultValue(value,array_index);
 }
 
 #endif

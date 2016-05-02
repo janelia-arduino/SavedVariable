@@ -13,6 +13,9 @@
 #include <EEPROM.h>
 #endif
 
+#include "Arduino.h"
+#include "Streaming.h"
+
 
 class SavedVariable
 {
@@ -28,6 +31,10 @@ public:
                 const T default_value[],
                 const unsigned int array_length);
   void setName(const ConstantString &name);
+  template<typename T>
+  int getDefaultValue(T &value);
+  template<typename T>
+  int getDefaultValue(T value[], unsigned int array_index);
   template<typename T>
   int setValue(const T &value);
   template<typename T>
