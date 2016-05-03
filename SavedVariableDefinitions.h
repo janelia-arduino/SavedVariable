@@ -10,11 +10,9 @@
 
 
 template<typename T>
-SavedVariable::SavedVariable(const ConstantString &name,
-                             const unsigned int eeprom_index,
+SavedVariable::SavedVariable(const unsigned int eeprom_index,
                              const T &default_value)
 {
-  setName(name);
   eeprom_index_ = eeprom_index;
   size_ = sizeof(default_value);
   default_value_ptr_ = &default_value;
@@ -22,12 +20,10 @@ SavedVariable::SavedVariable(const ConstantString &name,
 }
 
 template<typename T>
-SavedVariable::SavedVariable(const ConstantString &name,
-                             const unsigned int eeprom_index,
+SavedVariable::SavedVariable(const unsigned int eeprom_index,
                              const T default_value[],
                              const unsigned int array_length)
 {
-  setName(name);
   eeprom_index_ = eeprom_index;
   array_element_size_ = sizeof(T);
   size_ = array_length*array_element_size_;

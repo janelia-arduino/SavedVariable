@@ -12,11 +12,6 @@ SavedVariable::SavedVariable()
 {
 }
 
-void SavedVariable::setName(const ConstantString &name)
-{
-  name_ptr_ = &name;
-}
-
 #ifndef ARDUINO_SAM_DUE
 void SavedVariable::setDefaultValue()
 {
@@ -44,9 +39,4 @@ void SavedVariable::setDefaultValue()
 int SavedVariable::getSize()
 {
   return size_;
-}
-
-boolean SavedVariable::compareName(const ConstantString &name_to_compare)
-{
-  return (&name_to_compare == name_ptr_);
 }

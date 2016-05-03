@@ -7,7 +7,6 @@
 // ----------------------------------------------------------------------------
 #ifndef SAVED_VARIABLE_H
 #define SAVED_VARIABLE_H
-#include "ConstantVariable.h"
 
 #ifndef ARDUINO_SAM_DUE
 #include <EEPROM.h>
@@ -22,15 +21,12 @@ class SavedVariable
 public:
   SavedVariable();
   template<typename T>
-  SavedVariable(const ConstantString &name,
-                const unsigned int eeprom_index,
+  SavedVariable(const unsigned int eeprom_index,
                 const T &default_value);
   template<typename T>
-  SavedVariable(const ConstantString &name,
-                const unsigned int eeprom_index,
+  SavedVariable(const unsigned int eeprom_index,
                 const T default_value[],
                 const unsigned int array_length);
-  void setName(const ConstantString &name);
   template<typename T>
   int getDefaultValue(T &value);
   template<typename T>
@@ -45,9 +41,7 @@ public:
   int getValue(T value[], unsigned int array_index);
   void setDefaultValue();
   int getSize();
-  boolean compareName(const ConstantString& name_to_compare);
 private:
-  const ConstantString *name_ptr_;
   unsigned int eeprom_index_;
   unsigned int size_;
   const void *default_value_ptr_;
