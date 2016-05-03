@@ -21,11 +21,9 @@ class SavedVariable
 public:
   SavedVariable();
   template<typename T>
-  SavedVariable(const unsigned int eeprom_index,
-                const T &default_value);
+  SavedVariable(const T &default_value);
   template<typename T>
-  SavedVariable(const unsigned int eeprom_index,
-                const T default_value[],
+  SavedVariable(const T default_value[],
                 const unsigned int array_length);
   template<typename T>
   int getDefaultValue(T &value);
@@ -42,6 +40,7 @@ public:
   void setDefaultValue();
   int getSize();
 private:
+  static unsigned int s_eeprom_index;
   unsigned int eeprom_index_;
   unsigned int size_;
   const void *default_value_ptr_;

@@ -36,34 +36,19 @@ void setup()
   Serial.begin(BAUDRATE);
   Serial.flush();
 
-  int eeprom_index = 0;
+  SavedVariable eeprom_initialized(EEPROM_INITIALIZED_VALUE);
 
-  SavedVariable eeprom_initialized(eeprom_index,
-                                   EEPROM_INITIALIZED_VALUE);
-  eeprom_index += eeprom_initialized.getSize();
+  SavedVariable simple_int(SIMPLE_INT_DEFAULT_VALUE);
 
-  SavedVariable simple_int(eeprom_index,
-                           SIMPLE_INT_DEFAULT_VALUE);
-  eeprom_index += simple_int.getSize();
+  SavedVariable simple_double(SIMPLE_DOUBLE_DEFAULT_VALUE);
 
-  SavedVariable simple_double(eeprom_index,
-                              SIMPLE_DOUBLE_DEFAULT_VALUE);
-  eeprom_index += simple_double.getSize();
+  SavedVariable complex_struct(COMPLEX_STRUCT_DEFAULT_VALUE);
 
-  SavedVariable complex_struct(eeprom_index,
-                               COMPLEX_STRUCT_DEFAULT_VALUE);
-  eeprom_index += complex_struct.getSize();
-
-  SavedVariable one_d_array(eeprom_index,
-                            ONE_D_ARRAY_DEFAULT_VALUE,
+  SavedVariable one_d_array(ONE_D_ARRAY_DEFAULT_VALUE,
                             ONE_D_ARRAY_ELEMENT_COUNT);
-  eeprom_index += one_d_array.getSize();
 
-  SavedVariable two_d_array(eeprom_index,
-                            TWO_D_ARRAY_DEFAULT_VALUE,
+  SavedVariable two_d_array(TWO_D_ARRAY_DEFAULT_VALUE,
                             TWO_D_ARRAY_ELEMENT_COUNT_A);
-  eeprom_index += two_d_array.getSize();
-
 
   for (int i=0;i<2;++i)
   {

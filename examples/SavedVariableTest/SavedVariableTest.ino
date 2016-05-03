@@ -30,33 +30,19 @@ void setup()
   Serial.flush();
   delay(1000);
 
-  int eeprom_index = 0;
+  SavedVariable eeprom_initialized(eeprom_initialized_value);
 
-  SavedVariable eeprom_initialized(eeprom_index,
-                                   eeprom_initialized_value);
-  eeprom_index += eeprom_initialized.getSize();
+  SavedVariable simple_int(simple_int_default_value);
 
-  SavedVariable simple_int(eeprom_index,
-                           simple_int_default_value);
-  eeprom_index += simple_int.getSize();
+  SavedVariable simple_double(simple_double_default_value);
 
-  SavedVariable simple_double(eeprom_index,
-                              simple_double_default_value);
-  eeprom_index += simple_double.getSize();
+  SavedVariable complex_struct(complex_struct_default_value);
 
-  SavedVariable complex_struct(eeprom_index,
-                               complex_struct_default_value);
-  eeprom_index += complex_struct.getSize();
-
-  SavedVariable one_d_array(eeprom_index,
-                            one_d_array_default_value,
+  SavedVariable one_d_array(one_d_array_default_value,
                             one_d_array_element_count);
-  eeprom_index += one_d_array.getSize();
 
-  SavedVariable two_d_array(eeprom_index,
-                            two_d_array_default_value,
+  SavedVariable two_d_array(two_d_array_default_value,
                             two_d_array_element_count_a);
-  eeprom_index += two_d_array.getSize();
 
   int eeprom_initial_value;
   eeprom_initialized.getValue(eeprom_initial_value);

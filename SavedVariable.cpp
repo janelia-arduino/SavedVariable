@@ -8,6 +8,8 @@
 #include "SavedVariable.h"
 
 
+unsigned int SavedVariable::s_eeprom_index = 0;
+
 SavedVariable::SavedVariable()
 {
 }

@@ -10,25 +10,25 @@
 
 
 template<typename T>
-SavedVariable::SavedVariable(const unsigned int eeprom_index,
-                             const T &default_value)
+SavedVariable::SavedVariable(const T &default_value)
 {
-  eeprom_index_ = eeprom_index;
   size_ = sizeof(default_value);
   default_value_ptr_ = &default_value;
   array_length_ = 0;
+  eeprom_index_ = s_eeprom_index;
+  s_eeprom_index += getSize();
 }
 
 template<typename T>
-SavedVariable::SavedVariable(const unsigned int eeprom_index,
-                             const T default_value[],
+SavedVariable::SavedVariable(const T default_value[],
                              const unsigned int array_length)
 {
-  eeprom_index_ = eeprom_index;
   array_element_size_ = sizeof(T);
   size_ = array_length*array_element_size_;
   default_value_ptr_ = default_value;
   array_length_ = array_length;
+  eeprom_index_ = s_eeprom_index;
+  s_eeprom_index += getSize();
 }
 
 template<typename T>

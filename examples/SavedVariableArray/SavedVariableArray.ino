@@ -19,21 +19,13 @@ void setup()
   Serial.begin(BAUDRATE);
   Serial.flush();
 
-  int eeprom_index = 0;
+  SavedVariable eeprom_initialized(EEPROM_INITIALIZED_VALUE);
 
-  SavedVariable eeprom_initialized(eeprom_index,
-                                   EEPROM_INITIALIZED_VALUE);
-  eeprom_index += eeprom_initialized.getSize();
-
-  SavedVariable one_d_array(eeprom_index,
-                            ONE_D_ARRAY_DEFAULT_VALUE,
+  SavedVariable one_d_array(ONE_D_ARRAY_DEFAULT_VALUE,
                             ONE_D_ARRAY_ELEMENT_COUNT);
-  eeprom_index += one_d_array.getSize();
 
-  SavedVariable one_d_array_doubled(eeprom_index,
-                                    ONE_D_ARRAY_DEFAULT_VALUE,
+  SavedVariable one_d_array_doubled(ONE_D_ARRAY_DEFAULT_VALUE,
                                     ONE_D_ARRAY_ELEMENT_COUNT);
-  eeprom_index += one_d_array.getSize();
 
   for (int i=0;i<2;++i)
   {
