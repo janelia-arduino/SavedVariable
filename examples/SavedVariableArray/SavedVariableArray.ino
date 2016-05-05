@@ -51,7 +51,7 @@ void setup()
     Serial << "one_d_array_sv.getSize() = " << one_d_array_sv.getSize() << endl;
     for (int i=0; i<ONE_D_ARRAY_ELEMENT_COUNT; ++i)
     {
-      bytes_copied = one_d_array_sv.getValue(one_d_array_element,i);
+      bytes_copied = one_d_array_sv.getElementValue(one_d_array_element,i);
       Serial << "bytes copied = " << bytes_copied << "\n";
       Serial << "one_d_array[" << i << "] = " << one_d_array_element << " should be >= " << ONE_D_ARRAY_DEFAULT_VALUE[i] << endl;
     }
@@ -74,12 +74,12 @@ void setup()
     for (int i=0; i<ONE_D_ARRAY_ELEMENT_COUNT; ++i)
     {
       one_d_array_doubled_element = 2*one_d_array_copy[i];
-      bytes_written = one_d_array_doubled_sv.setValue(one_d_array_doubled_element,i);
+      bytes_written = one_d_array_doubled_sv.setElementValue(one_d_array_doubled_element,i);
       Serial << "bytes written = " << bytes_written << "\n";
     }
     for (int i=0; i<ONE_D_ARRAY_ELEMENT_COUNT; ++i)
     {
-      one_d_array_doubled_sv.getValue(one_d_array_doubled_element,i);
+      one_d_array_doubled_sv.getElementValue(one_d_array_doubled_element,i);
       Serial << "one_d_array_doubled[" << i << "] = " << one_d_array_doubled_element << " should be = " << 2*one_d_array_copy[i] << endl;
     }
 
@@ -101,7 +101,7 @@ void setup()
     Serial << "one_d_array_default_value_element_by_element = [";
     for (int i=0; i<ONE_D_ARRAY_ELEMENT_COUNT; ++i)
     {
-      bytes_copied = one_d_array_sv.getDefaultValue(one_d_array_default_value_element,i);
+      bytes_copied = one_d_array_sv.getDefaultElementValue(one_d_array_default_value_element,i);
       if (i != 0)
       {
         Serial << ",";

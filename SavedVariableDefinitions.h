@@ -49,13 +49,13 @@ int SavedVariable::getDefaultValue(T &value)
 }
 
 template<typename T>
-int SavedVariable::getDefaultValue(T &value, unsigned int array_index)
+int SavedVariable::getDefaultElementValue(T &value, unsigned int element_index)
 {
   int i = 0;
-  if ((sizeof(value) == array_element_size_) && (array_index < array_length_))
+  if ((sizeof(value) == array_element_size_) && (element_index < array_length_))
   {
     byte* p = (byte*)(void*)&value;
-    byte* q = (byte*)(void*)default_value_ptr_ + array_index*array_element_size_;
+    byte* q = (byte*)(void*)default_value_ptr_ + element_index*array_element_size_;
     for (i = 0; i < array_element_size_; i++)
     {
       if (i < size_)
@@ -93,13 +93,13 @@ int SavedVariable::setValue(const T &value)
 }
 
 template<typename T>
-int SavedVariable::setValue(const T &value, const unsigned int array_index)
+int SavedVariable::setElementValue(const T &value, const unsigned int element_index)
 {
   int i = 0;
-  if ((sizeof(value) == array_element_size_) && (array_index < array_length_))
+  if ((sizeof(value) == array_element_size_) && (element_index < array_length_))
   {
     const byte* p = (const byte*)(const void*)&value;
-    int ee = eeprom_index_ + array_index*array_element_size_;
+    int ee = eeprom_index_ + element_index*array_element_size_;
     for (i = 0; i < array_element_size_; i++)
     {
       if(EEPROM.read(ee)==*p)
@@ -133,13 +133,13 @@ int SavedVariable::getValue(T &value)
 }
 
 template<typename T>
-int SavedVariable::getValue(T &value, unsigned int array_index)
+int SavedVariable::getElementValue(T &value, unsigned int element_index)
 {
   int i = 0;
-  if ((sizeof(value) == array_element_size_) && (array_index < array_length_))
+  if ((sizeof(value) == array_element_size_) && (element_index < array_length_))
   {
     byte* p = (byte*)(void*)&value;
-    int ee = eeprom_index_ + array_index*array_element_size_;
+    int ee = eeprom_index_ + element_index*array_element_size_;
     for (i = 0; i < array_element_size_; i++)
     {
       if (i < size_)
@@ -160,7 +160,7 @@ int SavedVariable::setValue(const T &value)
 }
 
 template<typename T>
-int SavedVariable::setValue(const T &value, const unsigned int array_index)
+int SavedVariable::setElementValue(const T &value, const unsigned int element_index)
 {
   int i = 0;
   return i;
@@ -173,9 +173,9 @@ int SavedVariable::getValue(T &value)
 }
 
 template<typename T>
-int SavedVariable::getValue(T &value, unsigned int array_index)
+int SavedVariable::getElementValue(T &value, unsigned int element_index)
 {
-  return getDefaultValue(value,array_index);
+  return getDefaultElementValue(value,element_index);
 }
 
 #endif
