@@ -28,15 +28,15 @@ public:
   template<typename T>
   int getDefaultValue(T &value);
   template<typename T>
-  int getDefaultValue(T value[], unsigned int array_index);
+  int getDefaultValue(T &value, unsigned int array_index);
   template<typename T>
   int setValue(const T &value);
   template<typename T>
-  int setValue(const T value[], const unsigned int array_index);
+  int setValue(const T &value, const unsigned int array_index);
   template<typename T>
   int getValue(T &value);
   template<typename T>
-  int getValue(T value[], unsigned int array_index);
+  int getValue(T &value, unsigned int array_index);
   void setDefaultValue();
   int getSize();
 private:

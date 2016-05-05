@@ -36,34 +36,34 @@ void setup()
   Serial.begin(BAUDRATE);
   Serial.flush();
 
-  SavedVariable eeprom_initialized(EEPROM_INITIALIZED_VALUE);
+  SavedVariable eeprom_initialized_sv(EEPROM_INITIALIZED_VALUE);
 
-  SavedVariable simple_int(SIMPLE_INT_DEFAULT_VALUE);
+  SavedVariable simple_int_sv(SIMPLE_INT_DEFAULT_VALUE);
 
-  SavedVariable simple_double(SIMPLE_DOUBLE_DEFAULT_VALUE);
+  SavedVariable simple_double_sv(SIMPLE_DOUBLE_DEFAULT_VALUE);
 
-  SavedVariable complex_struct(COMPLEX_STRUCT_DEFAULT_VALUE);
+  SavedVariable complex_struct_sv(COMPLEX_STRUCT_DEFAULT_VALUE);
 
-  SavedVariable one_d_array(ONE_D_ARRAY_DEFAULT_VALUE,
-                            ONE_D_ARRAY_ELEMENT_COUNT);
+  SavedVariable one_d_array_sv(ONE_D_ARRAY_DEFAULT_VALUE,
+                               ONE_D_ARRAY_ELEMENT_COUNT);
 
-  SavedVariable two_d_array(TWO_D_ARRAY_DEFAULT_VALUE,
-                            TWO_D_ARRAY_ELEMENT_COUNT_A);
+  SavedVariable two_d_array_sv(TWO_D_ARRAY_DEFAULT_VALUE,
+                               TWO_D_ARRAY_ELEMENT_COUNT_A);
 
   for (int i=0;i<2;++i)
   {
     int eeprom_initial_value;
-    eeprom_initialized.getValue(eeprom_initial_value);
+    eeprom_initialized_sv.getValue(eeprom_initial_value);
     Serial << "eeprom_intial_value = " << eeprom_initial_value << " should be = " << EEPROM_INITIALIZED_VALUE << endl;
     if (eeprom_initial_value != EEPROM_INITIALIZED_VALUE)
     {
       Serial << "Default values set for the first time!" << endl;
-      eeprom_initialized.setDefaultValue();
-      simple_int.setDefaultValue();
-      complex_struct.setDefaultValue();
-      simple_double.setDefaultValue();
-      one_d_array.setDefaultValue();
-      two_d_array.setDefaultValue();
+      eeprom_initialized_sv.setDefaultValue();
+      simple_int_sv.setDefaultValue();
+      complex_struct_sv.setDefaultValue();
+      simple_double_sv.setDefaultValue();
+      one_d_array_sv.setDefaultValue();
+      two_d_array_sv.setDefaultValue();
     }
     else
     {
@@ -71,65 +71,67 @@ void setup()
     }
 
     int simple_int_value;
-    simple_int.getValue(simple_int_value);
-    Serial << "simple_int.getSize() = " << simple_int.getSize() << endl;
+    simple_int_sv.getValue(simple_int_value);
+    Serial << "simple_int_sv.getSize() = " << simple_int_sv.getSize() << endl;
     Serial << "simple_int_value = " << simple_int_value << " should be = " << SIMPLE_INT_DEFAULT_VALUE << endl;
 
     double simple_double_value;
-    simple_double.getValue(simple_double_value);
-    Serial << "simple_double.getSize() = " << simple_double.getSize() << endl;
+    simple_double_sv.getValue(simple_double_value);
+    Serial << "simple_double_sv.getSize() = " << simple_double_sv.getSize() << endl;
     Serial << "simple_double_value = " << simple_double_value << " should be >= " << SIMPLE_DOUBLE_DEFAULT_VALUE << endl;
     simple_double_value += 0.10;
-    simple_double.setValue(simple_double_value);
+    simple_double_sv.setValue(simple_double_value);
 
     Product complex_struct_value;
-    complex_struct.getValue(complex_struct_value);
-    Serial << "complex_struct.getSize() = " << complex_struct.getSize() << endl;
+    complex_struct_sv.getValue(complex_struct_value);
+    Serial << "complex_struct_sv.getSize() = " << complex_struct_sv.getSize() << endl;
     Serial << "complex_struct_value.weight = " << complex_struct_value.weight << " should be = " << WEIGHT_DEFAULT_VALUE << endl;
     Serial << "complex_struct_value.price = " << complex_struct_value.price << " should be >= " << PRICE_DEFAULT_VALUE << endl;
     Serial << "complex_struct_value.sold = " << complex_struct_value.sold << " should be = " << SOLD_DEFAULT_VALUE << endl;
     complex_struct_value.price += 0.10;
-    complex_struct.setValue(complex_struct_value);
+    complex_struct_sv.setValue(complex_struct_value);
 
-    int one_d_array_value[ONE_D_ARRAY_ELEMENT_COUNT];
-    Serial << "one_d_array.getSize() = " << one_d_array.getSize() << endl;
+    int one_d_array_element;
+    Serial << "one_d_array_sv.getSize() = " << one_d_array_sv.getSize() << endl;
     for (int i=0; i<ONE_D_ARRAY_ELEMENT_COUNT; ++i)
     {
-      one_d_array.getValue(one_d_array_value,i);
+      one_d_array_sv.getValue(one_d_array_element,i);
       if (i == 0)
       {
-        Serial << "one_d_array_value[" << i << "] = " << one_d_array_value[i] << " should be >= " << ONE_D_ARRAY_DEFAULT_VALUE[i] << endl;
+        Serial << "one_d_array[" << i << "] = " << one_d_array_element << " should be >= " << ONE_D_ARRAY_DEFAULT_VALUE[i] << endl;
       }
       else
       {
-        Serial << "one_d_array_value[" << i << "] = " << one_d_array_value[i] << " should be = " << ONE_D_ARRAY_DEFAULT_VALUE[i] << endl;
+        Serial << "one_d_array[" << i << "] = " << one_d_array_element << " should be = " << ONE_D_ARRAY_DEFAULT_VALUE[i] << endl;
       }
     }
     int p = 0;
-    one_d_array_value[p] += 1;
-    one_d_array.setValue(one_d_array_value,p);
+    one_d_array_sv.getValue(one_d_array_element,p);
+    one_d_array_element += 1;
+    one_d_array_sv.setValue(one_d_array_element,p);
 
-    int two_d_array_value[TWO_D_ARRAY_ELEMENT_COUNT_A][TWO_D_ARRAY_ELEMENT_COUNT_B];
-    Serial << "two_d_array.getSize() = " << two_d_array.getSize() << endl;
+    int two_d_array_element[TWO_D_ARRAY_ELEMENT_COUNT_B];
+    Serial << "two_d_array_sv.getSize() = " << two_d_array_sv.getSize() << endl;
     for (int i=0; i<TWO_D_ARRAY_ELEMENT_COUNT_A; ++i)
     {
-      two_d_array.getValue(two_d_array_value,i);
+      two_d_array_sv.getValue(two_d_array_element,i);
       for (int j=0; j<TWO_D_ARRAY_ELEMENT_COUNT_B; ++j)
       {
         if ((i == 0) && (j == 1))
         {
-          Serial << "two_d_array_value[" << i << "][" << j << "] = "<< two_d_array_value[i][j] << " should be >= " << TWO_D_ARRAY_DEFAULT_VALUE[i][j] << endl;
+          Serial << "two_d_array[" << i << "][" << j << "] = "<< two_d_array_element[j] << " should be >= " << TWO_D_ARRAY_DEFAULT_VALUE[i][j] << endl;
         }
         else
         {
-          Serial << "two_d_array_value[" << i << "][" << j << "] = "<< two_d_array_value[i][j] << " should be = " << TWO_D_ARRAY_DEFAULT_VALUE[i][j] << endl;
+          Serial << "two_d_array[" << i << "][" << j << "] = "<< two_d_array_element[j] << " should be = " << TWO_D_ARRAY_DEFAULT_VALUE[i][j] << endl;
         }
       }
     }
     int q = 0;
     int r = 1;
-    two_d_array_value[q][r] += 1;
-    two_d_array.setValue(two_d_array_value,q);
+    two_d_array_sv.getValue(two_d_array_element,q);
+    two_d_array_element[r] += 1;
+    two_d_array_sv.setValue(two_d_array_element,q);
 
     Serial << endl;
 
