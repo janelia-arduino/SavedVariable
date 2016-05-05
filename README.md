@@ -9,5 +9,7 @@ License:
     BSD
 
 
+Save arbitrary variable types into Arduino EEPROM.
+
 [Usage Examples](./examples)
 
