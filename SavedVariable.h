@@ -38,7 +38,10 @@ public:
   template<typename T>
   int getElementValue(T &value, unsigned int element_index);
   void setDefaultValue();
-  int getSize();
+  bool isDefaultValue();
+  unsigned int getSize();
+  unsigned int getArrayLength();
+  unsigned int getArrayElementSize();
 private:
   static unsigned int s_eeprom_index;
   unsigned int eeprom_index_;

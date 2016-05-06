@@ -32,13 +32,47 @@ void SavedVariable::setDefaultValue()
     }
   }
 }
+
+bool SavedVariable::isDefaultValue()
+{
+  const byte* p = (const byte*)(const void*)default_value_ptr_;
+  int ee = eeprom_index_;
+  for (unsigned int i = 0; i < size_; i++)
+  {
+    if(EEPROM.read(ee)==*p)
+    {
+      ee++;
+      p++;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  return true;
+}
 #else
 void SavedVariable::setDefaultValue()
 {
 }
+
+bool SavedVariable::isDefaultValue()
+{
+  return true;
+}
 #endif
 
-int SavedVariable::getSize()
+unsigned int SavedVariable::getSize()
 {
   return size_;
+}
+
+unsigned int SavedVariable::getArrayLength()
+{
+  return array_length_;
+}
+
+unsigned int SavedVariable::getArrayElementSize()
+{
+  return array_element_size_;
 }
