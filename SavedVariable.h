@@ -28,7 +28,7 @@ public:
   template<typename T>
   int getDefaultValue(T &value);
   template<typename T>
-  int getDefaultElementValue(T &value, unsigned int element_index);
+  int getDefaultElementValue(T &value, const unsigned int element_index);
   template<typename T>
   int setValue(const T &value);
   template<typename T>
@@ -36,7 +36,7 @@ public:
   template<typename T>
   int getValue(T &value);
   template<typename T>
-  int getElementValue(T &value, unsigned int element_index);
+  int getElementValue(T &value, const unsigned int element_index);
   void setDefaultValue();
   bool isDefaultValue();
   unsigned int getSize();

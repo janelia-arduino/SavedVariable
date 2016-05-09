@@ -49,7 +49,7 @@ int SavedVariable::getDefaultValue(T &value)
 }
 
 template<typename T>
-int SavedVariable::getDefaultElementValue(T &value, unsigned int element_index)
+int SavedVariable::getDefaultElementValue(T &value, const unsigned int element_index)
 {
   int i = 0;
   if ((sizeof(value) == array_element_size_) && (element_index < array_length_))
@@ -133,7 +133,7 @@ int SavedVariable::getValue(T &value)
 }
 
 template<typename T>
-int SavedVariable::getElementValue(T &value, unsigned int element_index)
+int SavedVariable::getElementValue(T &value, const unsigned int element_index)
 {
   int i = 0;
   if ((sizeof(value) == array_element_size_) && (element_index < array_length_))
@@ -173,7 +173,7 @@ int SavedVariable::getValue(T &value)
 }
 
 template<typename T>
-int SavedVariable::getElementValue(T &value, unsigned int element_index)
+int SavedVariable::getElementValue(T &value, const unsigned int element_index)
 {
   return getDefaultElementValue(value,element_index);
 }
