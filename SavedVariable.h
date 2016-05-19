@@ -24,31 +24,31 @@ public:
   SavedVariable(const T &default_value);
   template<typename T>
   SavedVariable(const T default_value[],
-                const unsigned int array_length);
+                const size_t array_length);
   template<typename T>
   int getDefaultValue(T &value);
   template<typename T>
-  int getDefaultElementValue(T &value, const unsigned int element_index);
+  int getDefaultElementValue(T &value, const size_t element_index);
   template<typename T>
   int setValue(const T &value);
   template<typename T>
-  int setElementValue(const T &value, const unsigned int element_index);
+  int setElementValue(const T &value, const size_t element_index);
   template<typename T>
   int getValue(T &value);
   template<typename T>
-  int getElementValue(T &value, const unsigned int element_index);
+  int getElementValue(T &value, const size_t element_index);
   void setDefaultValue();
   bool isDefaultValue();
-  unsigned int getSize();
-  unsigned int getArrayLength();
-  unsigned int getArrayElementSize();
+  size_t getSize();
+  size_t getArrayLength();
+  size_t getArrayElementSize();
 private:
-  static unsigned int s_eeprom_index;
-  unsigned int eeprom_index_;
-  unsigned int size_;
+  static size_t s_eeprom_index;
+  size_t eeprom_index_;
+  size_t size_;
   const void *default_value_ptr_;
-  unsigned int array_length_;
-  unsigned int array_element_size_;
+  size_t array_length_;
+  size_t array_element_size_;
 };
 #include "SavedVariableDefinitions.h"
 #endif

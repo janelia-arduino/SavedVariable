@@ -8,7 +8,7 @@
 #include "SavedVariable.h"
 
 
-unsigned int SavedVariable::s_eeprom_index = 0;
+size_t SavedVariable::s_eeprom_index = 0;
 
 SavedVariable::SavedVariable()
 {
@@ -19,7 +19,7 @@ void SavedVariable::setDefaultValue()
 {
   const byte* p = (const byte*)(const void*)default_value_ptr_;
   int ee = eeprom_index_;
-  for (unsigned int i = 0; i < size_; i++)
+  for (size_t i = 0; i < size_; i++)
   {
     if(EEPROM.read(ee)==*p)
     {
@@ -37,7 +37,7 @@ bool SavedVariable::isDefaultValue()
 {
   const byte* p = (const byte*)(const void*)default_value_ptr_;
   int ee = eeprom_index_;
-  for (unsigned int i = 0; i < size_; i++)
+  for (size_t i = 0; i < size_; i++)
   {
     if(EEPROM.read(ee)==*p)
     {
@@ -62,17 +62,17 @@ bool SavedVariable::isDefaultValue()
 }
 #endif
 
-unsigned int SavedVariable::getSize()
+size_t SavedVariable::getSize()
 {
   return size_;
 }
 
-unsigned int SavedVariable::getArrayLength()
+size_t SavedVariable::getArrayLength()
 {
   return array_length_;
 }
 
-unsigned int SavedVariable::getArrayElementSize()
+size_t SavedVariable::getArrayElementSize()
 {
   return array_element_size_;
 }
