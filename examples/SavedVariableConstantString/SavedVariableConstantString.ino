@@ -8,9 +8,25 @@
 
 const int BAUDRATE = 9600;
 
-const int EEPROM_INITIALIZED_VALUE = 99;
-CONSTANT_STRING(constant_string,"AbCdEfG");
-ConstantString * const CONSTANT_STRING_PTR_DEFAULT = &constant_string;
+union SubsetMemberType
+{
+  const long l;
+  ConstantString * const cs_ptr;
+};
+
+const int EEPROM_INITIALIZED_VALUE = 98;
+
+enum{MODE_SUBSET_LENGTH=3};
+CONSTANT_STRING(mode_rising,"RISING");
+CONSTANT_STRING(mode_falling,"FALLING");
+CONSTANT_STRING(mode_change,"CHANGE");
+const SubsetMemberType mode_ptr_subset[MODE_SUBSET_LENGTH] =
+  {
+    {.cs_ptr=&mode_rising},
+    {.cs_ptr=&mode_falling},
+    {.cs_ptr=&mode_change},
+  };
+const ConstantString * const mode_ptr_default = &mode_rising;
 
 void setup()
 {
@@ -21,9 +37,9 @@ void setup()
 
   SavedVariable eeprom_initialized_sv(EEPROM_INITIALIZED_VALUE);
 
-  SavedVariable constant_string_ptr_sv(CONSTANT_STRING_PTR_DEFAULT);
+  SavedVariable mode_ptr_sv(mode_ptr_default);
 
-  for (int i=0;i<2;++i)
+  for (int i=0; i<4; ++i)
   {
     int eeprom_initial_value;
     eeprom_initialized_sv.getValue(eeprom_initial_value);
@@ -32,21 +48,30 @@ void setup()
     {
       Serial << "Default values set for the first time!" << endl;
       eeprom_initialized_sv.setDefaultValue();
-      constant_string_ptr_sv.setDefaultValue();
+      mode_ptr_sv.setDefaultValue();
     }
     else
     {
       Serial << "Default values already set!" << endl;
     }
 
-    ConstantString *constant_string_ptr;
-    constant_string_ptr_sv.getValue(constant_string_ptr);
-    Serial << "constant_string_ptr_sv.getSize() = " << constant_string_ptr_sv.getSize() << endl;
-    Serial << "constant_string_value = " << *constant_string_ptr << " should be = " << constant_string << endl;
-
+    const ConstantString *read_mode_ptr;
+    mode_ptr_sv.getValue(read_mode_ptr);
+    Serial << "initial mode value = " << *read_mode_ptr << endl;
     Serial << endl;
 
-    delay(4000);
+    for (int j=0; j<MODE_SUBSET_LENGTH; ++j)
+    {
+      const ConstantString * const write_mode_ptr = mode_ptr_subset[j].cs_ptr;
+      mode_ptr_sv.setValue(write_mode_ptr);
+      mode_ptr_sv.getValue(read_mode_ptr);
+      Serial << "mode value = " << *read_mode_ptr << " should be = " << *write_mode_ptr << endl;
+
+      Serial << endl;
+
+      delay(1000);
+    }
+    delay(2000);
   }
 }
 
