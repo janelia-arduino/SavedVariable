@@ -58,6 +58,8 @@ void setup()
     const ConstantString *read_mode_ptr;
     mode_ptr_sv.getValue(read_mode_ptr);
     Serial << "initial mode value = " << *read_mode_ptr << endl;
+    mode_ptr_sv.getDefaultValue(read_mode_ptr);
+    Serial << "default mode value = " << *read_mode_ptr << endl;
     Serial << endl;
 
     for (int j=0; j<MODE_SUBSET_LENGTH; ++j)
