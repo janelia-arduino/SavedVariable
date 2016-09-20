@@ -33,7 +33,7 @@ void SavedVariable::setDefaultValue()
   }
 }
 
-bool SavedVariable::isDefaultValue()
+bool SavedVariable::valueIsDefault()
 {
   const byte* p = (const byte*)(const void*)default_value_ptr_;
   int ee = eeprom_index_;
@@ -56,7 +56,7 @@ void SavedVariable::setDefaultValue()
 {
 }
 
-bool SavedVariable::isDefaultValue()
+bool SavedVariable::valueIsDefault()
 {
   return true;
 }
