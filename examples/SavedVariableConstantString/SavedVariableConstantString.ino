@@ -47,8 +47,8 @@ void setup()
     if (eeprom_initial_value != EEPROM_INITIALIZED_VALUE)
     {
       Serial << "Default values set for the first time!" << endl;
-      eeprom_initialized_sv.setDefaultValue();
-      mode_ptr_sv.setDefaultValue();
+      eeprom_initialized_sv.setValueToDefault();
+      mode_ptr_sv.setValueToDefault();
     }
     else
     {

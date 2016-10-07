@@ -39,9 +39,9 @@ void setup()
     if (eeprom_initial_value != EEPROM_INITIALIZED_VALUE)
     {
       Serial << "Default values set for the first time!" << endl;
-      eeprom_initialized_sv.setDefaultValue();
-      one_d_array_sv.setDefaultValue();
-      one_d_array_doubled_sv.setDefaultValue();
+      eeprom_initialized_sv.setValueToDefault();
+      one_d_array_sv.setValueToDefault();
+      one_d_array_doubled_sv.setValueToDefault();
     }
     else
     {
@@ -125,7 +125,7 @@ void setup()
   }
   bool one_d_array_is_default = one_d_array_sv.valueIsDefault();
   Serial << "one_d_array_is_default = " << one_d_array_is_default << "\n";
-  one_d_array_sv.setDefaultValue();
+  one_d_array_sv.setValueToDefault();
   for (int i=0; i<ONE_D_ARRAY_ELEMENT_COUNT; ++i)
   {
     bytes_copied = one_d_array_sv.getElementValue(one_d_array_element,i);

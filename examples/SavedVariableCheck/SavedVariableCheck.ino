@@ -58,12 +58,12 @@ void setup()
     if (eeprom_initial_value != EEPROM_INITIALIZED_VALUE)
     {
       Serial << "Default values set for the first time!" << endl;
-      eeprom_initialized_sv.setDefaultValue();
-      simple_int_sv.setDefaultValue();
-      complex_struct_sv.setDefaultValue();
-      simple_double_sv.setDefaultValue();
-      one_d_array_sv.setDefaultValue();
-      two_d_array_sv.setDefaultValue();
+      eeprom_initialized_sv.setValueToDefault();
+      simple_int_sv.setValueToDefault();
+      complex_struct_sv.setValueToDefault();
+      simple_double_sv.setValueToDefault();
+      one_d_array_sv.setValueToDefault();
+      two_d_array_sv.setValueToDefault();
     }
     else
     {

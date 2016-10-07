@@ -15,7 +15,7 @@ SavedVariable::SavedVariable()
 }
 
 #ifndef ARDUINO_SAM_DUE
-void SavedVariable::setDefaultValue()
+void SavedVariable::setValueToDefault()
 {
   const byte* p = (const byte*)(const void*)default_value_ptr_;
   int ee = eeprom_index_;
@@ -52,7 +52,7 @@ bool SavedVariable::valueIsDefault()
   return true;
 }
 #else
-void SavedVariable::setDefaultValue()
+void SavedVariable::setValueToDefault()
 {
 }
 
