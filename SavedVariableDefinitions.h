@@ -67,6 +67,17 @@ int SavedVariable::getDefaultElementValue(T &value, const size_t element_index)
   return i;
 }
 
+template<typename T>
+bool SavedVariable::setDefaultValue(const T &default_value)
+{
+  if (sizeof(default_value) == size_)
+  {
+    default_value_ptr_ = &default_value;
+    return true;
+  }
+  return false;
+}
+
 #ifndef ARDUINO_SAM_DUE
 template<typename T>
 int SavedVariable::setValue(const T &value)

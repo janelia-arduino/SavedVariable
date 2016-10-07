@@ -39,6 +39,8 @@ public:
   int getElementValue(T &value, const size_t element_index);
   void setValueToDefault();
   bool valueIsDefault();
+  template<typename T>
+  bool setDefaultValue(const T &default_value);
   size_t getSize();
   size_t getArrayLength();
   size_t getArrayElementSize();

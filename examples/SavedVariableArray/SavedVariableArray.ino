@@ -11,6 +11,7 @@ const int EEPROM_INITIALIZED_VALUE = 44;
 
 const int ONE_D_ARRAY_ELEMENT_COUNT = 4;
 const int ONE_D_ARRAY_DEFAULT_VALUE[ONE_D_ARRAY_ELEMENT_COUNT] = {10,11,12,13};
+const int ONE_D_ARRAY_NEW_DEFAULT_VALUE[ONE_D_ARRAY_ELEMENT_COUNT] = {100,110,120,130};
 
 void setup()
 {
@@ -133,6 +134,24 @@ void setup()
   }
   one_d_array_is_default = one_d_array_sv.valueIsDefault();
   Serial << "one_d_array_is_default = " << one_d_array_is_default << "\n";
+
+  Serial << "set new default value for one_d_array_sv\n";
+  one_d_array_sv.setDefaultValue(ONE_D_ARRAY_NEW_DEFAULT_VALUE);
+
+  one_d_array_is_default = one_d_array_sv.valueIsDefault();
+  Serial << "one_d_array_is_default = " << one_d_array_is_default << "\n";
+
+  Serial << "set value to default for one_d_array_sv\n";
+  one_d_array_sv.setValueToDefault();
+
+  one_d_array_is_default = one_d_array_sv.valueIsDefault();
+  Serial << "one_d_array_is_default = " << one_d_array_is_default << "\n";
+
+  for (int i=0; i<ONE_D_ARRAY_ELEMENT_COUNT; ++i)
+  {
+    bytes_copied = one_d_array_sv.getElementValue(one_d_array_element,i);
+    Serial << "one_d_array[" << i << "] = " << one_d_array_element << " should be = " << ONE_D_ARRAY_NEW_DEFAULT_VALUE[i] << endl;
+  }
 }
 
 
