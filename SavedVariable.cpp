@@ -17,11 +17,11 @@ SavedVariable::SavedVariable()
 #ifndef ARDUINO_SAM_DUE
 void SavedVariable::setValueToDefault()
 {
-  const byte* p = (const byte*)(const void*)default_value_ptr_;
+  const byte* p = (const byte *)(const void *)default_value_ptr_;
   int ee = eeprom_index_;
-  for (size_t i = 0; i < size_; i++)
+  for (size_t i=0; i<size_; ++i)
   {
-    if(EEPROM.read(ee)==*p)
+    if(EEPROM.read(ee) == *p)
     {
       ee++;
       p++;
@@ -35,11 +35,11 @@ void SavedVariable::setValueToDefault()
 
 bool SavedVariable::valueIsDefault()
 {
-  const byte* p = (const byte*)(const void*)default_value_ptr_;
+  const byte* p = (const byte *)(const void *)default_value_ptr_;
   int ee = eeprom_index_;
-  for (size_t i = 0; i < size_; i++)
+  for (size_t i=0; i<size_; ++i)
   {
-    if(EEPROM.read(ee)==*p)
+    if(EEPROM.read(ee) == *p)
     {
       ee++;
       p++;

@@ -95,7 +95,7 @@ void setup()
     Serial << "one_d_array_sv.getSize() = " << one_d_array_sv.getSize() << endl;
     for (int i=0; i<ONE_D_ARRAY_ELEMENT_COUNT; ++i)
     {
-      one_d_array_sv.getElementValue(one_d_array_element,i);
+      one_d_array_sv.getElementValue(i,one_d_array_element);
       if (i == 0)
       {
         Serial << "one_d_array[" << i << "] = " << one_d_array_element << " should be >= " << ONE_D_ARRAY_DEFAULT_VALUE[i] << endl;
@@ -106,15 +106,15 @@ void setup()
       }
     }
     int p = 0;
-    one_d_array_sv.getElementValue(one_d_array_element,p);
+    one_d_array_sv.getElementValue(p,one_d_array_element);
     one_d_array_element += 1;
-    one_d_array_sv.setElementValue(one_d_array_element,p);
+    one_d_array_sv.setElementValue(p,one_d_array_element);
 
     int two_d_array_element[TWO_D_ARRAY_ELEMENT_COUNT_B];
     Serial << "two_d_array_sv.getSize() = " << two_d_array_sv.getSize() << endl;
     for (int i=0; i<TWO_D_ARRAY_ELEMENT_COUNT_A; ++i)
     {
-      two_d_array_sv.getElementValue(two_d_array_element,i);
+      two_d_array_sv.getElementValue(i,two_d_array_element);
       for (int j=0; j<TWO_D_ARRAY_ELEMENT_COUNT_B; ++j)
       {
         if ((i == 0) && (j == 1))
@@ -129,9 +129,9 @@ void setup()
     }
     int q = 0;
     int r = 1;
-    two_d_array_sv.getElementValue(two_d_array_element,q);
+    two_d_array_sv.getElementValue(q,two_d_array_element);
     two_d_array_element[r] += 1;
-    two_d_array_sv.setElementValue(two_d_array_element,q);
+    two_d_array_sv.setElementValue(q,two_d_array_element);
 
     Serial << endl;
 
