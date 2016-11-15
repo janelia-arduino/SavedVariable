@@ -38,6 +38,7 @@ public:
   template<typename T>
   int getElementValue(const size_t element_index, T & value);
   void setValueToDefault();
+  void setElementValueToDefault(const size_t element_index);
   bool valueIsDefault();
   template<typename T>
   bool setDefaultValue(const T & default_value);

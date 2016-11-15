@@ -152,6 +152,22 @@ void setup()
     bytes_copied = one_d_array_sv.getElementValue(i,one_d_array_element);
     Serial << "one_d_array[" << i << "] = " << one_d_array_element << " should be = " << ONE_D_ARRAY_NEW_DEFAULT_VALUE[i] << endl;
   }
+
+  int one_d_array_doubled_element;
+  for (int i=0; i<ONE_D_ARRAY_ELEMENT_COUNT; ++i)
+  {
+    one_d_array_doubled_sv.getElementValue(i,one_d_array_doubled_element);
+    Serial << "one_d_array_doubled[" << i << "] = " << one_d_array_doubled_element << endl;
+  }
+  Serial << "one_d_array_doubled_sv.setElementValueToDefault(1)" << endl;
+  Serial << "one_d_array_doubled_sv.setElementValueToDefault(3)" << endl;
+  one_d_array_doubled_sv.setElementValueToDefault(1);
+  one_d_array_doubled_sv.setElementValueToDefault(3);
+  for (int i=0; i<ONE_D_ARRAY_ELEMENT_COUNT; ++i)
+  {
+    one_d_array_doubled_sv.getElementValue(i,one_d_array_doubled_element);
+    Serial << "one_d_array_doubled[" << i << "] = " << one_d_array_doubled_element << endl;
+  }
 }
 
 

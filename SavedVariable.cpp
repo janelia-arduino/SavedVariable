@@ -33,6 +33,27 @@ void SavedVariable::setValueToDefault()
   }
 }
 
+void SavedVariable::setElementValueToDefault(const size_t element_index)
+{
+  if (element_index < array_length_)
+  {
+    byte * p = (byte *)(void *)default_value_ptr_ + element_index*array_element_size_;
+    int ee = eeprom_index_ + element_index*array_element_size_;
+    for (size_t i=0; i<array_element_size_; ++i)
+    {
+      if(EEPROM.read(ee) == *p)
+      {
+        ee++;
+        p++;
+      }
+      else
+      {
+        EEPROM.write(ee++,*p++);
+      }
+    }
+  }
+}
+
 bool SavedVariable::valueIsDefault()
 {
   const byte* p = (const byte *)(const void *)default_value_ptr_;
@@ -53,6 +74,10 @@ bool SavedVariable::valueIsDefault()
 }
 #else
 void SavedVariable::setValueToDefault()
+{
+}
+
+void SavedVariable::setElementValueToDefault()
 {
 }
 
