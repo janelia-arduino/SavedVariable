@@ -14,6 +14,7 @@ SavedVariable::SavedVariable(const T & default_value)
 {
   array_element_size_ = 0;
   array_length_ = 0;
+  array_length_max_ = 0;
   size_ = sizeof(default_value);
   default_value_ptr_ = &default_value;
   eeprom_index_ = s_eeprom_index;
@@ -25,7 +26,8 @@ SavedVariable::SavedVariable(const T (&default_value)[N])
 {
   array_element_size_ = sizeof(T);
   array_length_ = N;
-  size_ = N*array_element_size_;
+  array_length_max_ = N;
+  size_ = array_element_size_*N;
   default_value_ptr_ = default_value;
   eeprom_index_ = s_eeprom_index;
   s_eeprom_index += getSize();

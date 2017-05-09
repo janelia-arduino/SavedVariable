@@ -97,6 +97,25 @@ size_t SavedVariable::getArrayLength()
   return array_length_;
 }
 
+void SavedVariable::setArrayLength(const size_t array_length)
+{
+  if ((array_length >= 1) && (array_length <= array_length_max_))
+  {
+    array_length_ = array_length;
+    size_ = array_element_size_*array_length;
+  }
+}
+
+size_t SavedVariable::getArrayLengthMax()
+{
+  return array_length_max_;
+}
+
+void SavedVariable::setArrayLengthToMax()
+{
+  setArrayLength(array_length_max_);
+}
+
 size_t SavedVariable::getArrayElementSize()
 {
   return array_element_size_;

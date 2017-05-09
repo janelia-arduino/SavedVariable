@@ -55,6 +55,22 @@ void setup()
       Serial << "one_d_array[" << i << "] = " << one_d_array_element << " should be >= " << ONE_D_ARRAY_DEFAULT_VALUE[i] << endl;
     }
 
+    int array_length_test = 2;
+    Serial << "one_d_array_sv.getArrayLength() = " << one_d_array_sv.getArrayLength() << endl;
+    Serial << "one_d_array_sv.getArrayLengthMax() = " << one_d_array_sv.getArrayLengthMax() << endl;
+    Serial << "one_d_array_sv.setArrayLength(" << array_length_test << ")" << endl;
+    one_d_array_sv.setArrayLength(array_length_test);
+    Serial << "one_d_array_sv.getArrayLength() = " << one_d_array_sv.getArrayLength() << endl;
+    for (int i=0; i<one_d_array_sv.getArrayLength(); ++i)
+    {
+      bytes_copied = one_d_array_sv.getElementValue(i,one_d_array_element);
+      Serial << "bytes copied = " << bytes_copied << "\n";
+      Serial << "one_d_array[" << i << "] = " << one_d_array_element << " should be >= " << ONE_D_ARRAY_DEFAULT_VALUE[i] << endl;
+    }
+    Serial << "one_d_array_sv.setArrayLengthToMax()" << endl;
+    one_d_array_sv.setArrayLengthToMax();
+    Serial << "one_d_array_sv.getArrayLength() = " << one_d_array_sv.getArrayLength() << endl;
+
     int one_d_array_copy[ONE_D_ARRAY_ELEMENT_COUNT];
     bytes_copied = one_d_array_sv.getValue(one_d_array_copy);
     Serial << "bytes copied = " << bytes_copied << "\n";

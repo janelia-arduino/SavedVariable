@@ -43,6 +43,9 @@ public:
   bool setDefaultValue(const T & default_value);
   size_t getSize();
   size_t getArrayLength();
+  void setArrayLength(const size_t array_length);
+  size_t getArrayLengthMax();
+  void setArrayLengthToMax();
   size_t getArrayElementSize();
 private:
   static size_t s_eeprom_index;
@@ -50,6 +53,7 @@ private:
   size_t size_;
   const void * default_value_ptr_;
   size_t array_length_;
+  size_t array_length_max_;
   size_t array_element_size_;
 };
 #include "SavedVariableDefinitions.h"
