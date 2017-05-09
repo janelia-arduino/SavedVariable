@@ -20,13 +20,12 @@ SavedVariable::SavedVariable(const T & default_value)
   s_eeprom_index += getSize();
 }
 
-template<typename T>
-SavedVariable::SavedVariable(const T default_value[],
-                             const size_t array_length)
+template<typename T, size_t N>
+SavedVariable::SavedVariable(const T (&default_value)[N])
 {
   array_element_size_ = sizeof(T);
-  array_length_ = array_length;
-  size_ = array_length*array_element_size_;
+  array_length_ = N;
+  size_ = N*array_element_size_;
   default_value_ptr_ = default_value;
   eeprom_index_ = s_eeprom_index;
   s_eeprom_index += getSize();

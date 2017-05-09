@@ -44,11 +44,9 @@ void setup()
 
   SavedVariable complex_struct_sv(COMPLEX_STRUCT_DEFAULT_VALUE);
 
-  SavedVariable one_d_array_sv(ONE_D_ARRAY_DEFAULT_VALUE,
-                               ONE_D_ARRAY_ELEMENT_COUNT);
+  SavedVariable one_d_array_sv(ONE_D_ARRAY_DEFAULT_VALUE);
 
-  SavedVariable two_d_array_sv(TWO_D_ARRAY_DEFAULT_VALUE,
-                               TWO_D_ARRAY_ELEMENT_COUNT_A);
+  SavedVariable two_d_array_sv(TWO_D_ARRAY_DEFAULT_VALUE);
 
   for (int i=0;i<2;++i)
   {

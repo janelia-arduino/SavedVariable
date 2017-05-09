@@ -22,9 +22,8 @@ public:
   SavedVariable();
   template<typename T>
   SavedVariable(const T & default_value);
-  template<typename T>
-  SavedVariable(const T default_value[],
-                const size_t array_length);
+  template<typename T, size_t N>
+  SavedVariable(const T (&default_value)[N]);
   template<typename T>
   int getDefaultValue(T & value);
   template<typename T>

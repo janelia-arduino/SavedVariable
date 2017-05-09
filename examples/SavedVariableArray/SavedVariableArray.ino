@@ -22,11 +22,9 @@ void setup()
 
   SavedVariable eeprom_initialized_sv(EEPROM_INITIALIZED_VALUE);
 
-  SavedVariable one_d_array_sv(ONE_D_ARRAY_DEFAULT_VALUE,
-                               ONE_D_ARRAY_ELEMENT_COUNT);
+  SavedVariable one_d_array_sv(ONE_D_ARRAY_DEFAULT_VALUE);
 
-  SavedVariable one_d_array_doubled_sv(ONE_D_ARRAY_DEFAULT_VALUE,
-                                       ONE_D_ARRAY_ELEMENT_COUNT);
+  SavedVariable one_d_array_doubled_sv(ONE_D_ARRAY_DEFAULT_VALUE);
 
   int bytes_copied = 0;
   int bytes_written = 0;
