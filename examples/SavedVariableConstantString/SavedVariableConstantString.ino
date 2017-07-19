@@ -6,7 +6,8 @@
 #include "SavedVariable.h"
 #include "ConstantVariable.h"
 
-const int BAUDRATE = 9600;
+
+const size_t BAUDRATE = 115200;
 
 union SubsetMemberType
 {

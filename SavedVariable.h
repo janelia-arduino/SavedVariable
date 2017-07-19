@@ -25,25 +25,27 @@ public:
   template<typename T, size_t N>
   SavedVariable(const T (&default_value)[N]);
   template<typename T>
-  int getDefaultValue(T & value);
+  size_t getDefaultValue(T & value);
   template<typename T>
-  int getDefaultElementValue(const size_t element_index, T & value);
+  size_t getDefaultElementValue(const size_t element_index, T & value);
   template<typename T>
-  int setValue(const T &value);
+  size_t setValue(const T &value);
   template<typename T>
-  int setElementValue(const size_t element_index, const T & value);
+  size_t setElementValue(const size_t element_index, const T & value);
   template<typename T>
-  int getValue(T & value);
+  size_t getValue(T & value);
   template<typename T>
-  int getElementValue(const size_t element_index, T & value);
+  size_t getElementValue(const size_t element_index, T & value);
   void setValueToDefault();
   void setElementValueToDefault(const size_t element_index);
   bool valueIsDefault();
   template<typename T>
   bool setDefaultValue(const T & default_value);
+  template<typename T, size_t N>
+  bool setDefaultValue(const T (&default_value)[N]);
   size_t getSize();
   size_t getArrayLength();
-  void setArrayLength(const size_t array_length);
+  bool setArrayLength(const size_t array_length);
   size_t getArrayLengthMax();
   void setArrayLengthToMax();
   size_t getArrayElementSize();
@@ -54,6 +56,7 @@ private:
   const void * default_value_ptr_;
   size_t array_length_;
   size_t array_length_max_;
+  size_t array_length_max_at_construction_;
   size_t array_element_size_;
 };
 #include "SavedVariableDefinitions.h"
