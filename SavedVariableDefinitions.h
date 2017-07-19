@@ -88,7 +88,10 @@ bool SavedVariable::setDefaultValue(const T (&default_value)[N])
   if ((N <= array_length_max_at_construction_) &&
       (sizeof(T) == array_element_size_))
   {
-    array_length_ = N;
+    if (array_length_ > N)
+    {
+      array_length_ = N;
+    }
     array_length_max_ = N;
     size_ = array_element_size_*N;
     default_value_ptr_ = default_value;

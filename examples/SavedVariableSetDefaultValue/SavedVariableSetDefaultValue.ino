@@ -40,6 +40,7 @@ void setup()
 
   bool set_default_value = one_d_array_sv.setDefaultValue(ONE_D_ARRAY_DEFAULT_VALUE_1);
   Serial << "set_default_value = " << set_default_value << endl;
+  one_d_array_sv.setArrayLengthToMax();
   one_d_array_sv.setValueToDefault();
 
   Serial << "one_d_array_sv.getSize() = " << one_d_array_sv.getSize() << endl;
@@ -69,6 +70,7 @@ void setup()
 
   set_default_value = one_d_array_sv.setDefaultValue(ONE_D_ARRAY_DEFAULT_VALUE_2);
   Serial << "set_default_value = " << set_default_value << endl;
+  one_d_array_sv.setArrayLengthToMax();
   one_d_array_sv.setValueToDefault();
 
   Serial << "one_d_array_sv.getSize() = " << one_d_array_sv.getSize() << endl;
@@ -98,6 +100,7 @@ void setup()
 
   set_default_value = one_d_array_sv.setDefaultValue(ONE_D_ARRAY_DEFAULT_VALUE_3);
   Serial << "set_default_value = " << set_default_value << endl;
+  one_d_array_sv.setArrayLengthToMax();
   one_d_array_sv.setValueToDefault();
 
   Serial << "one_d_array_sv.getSize() = " << one_d_array_sv.getSize() << endl;
