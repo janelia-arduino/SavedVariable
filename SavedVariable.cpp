@@ -99,12 +99,15 @@ size_t SavedVariable::getArrayLength()
 
 bool SavedVariable::setArrayLength(const size_t array_length)
 {
+  bool success = false;
   if ((array_length >= 1) &&
       (array_length <= array_length_max_))
   {
     array_length_ = array_length;
     size_ = array_element_size_*array_length;
+    success = true;
   }
+  return success;
 }
 
 size_t SavedVariable::getArrayLengthMax()
