@@ -5,7 +5,7 @@
 // Authors:
 // Peter Polidoro polidorop@janelia.hhmi.org
 // ----------------------------------------------------------------------------
-#include "SavedVariable.h"
+#include "../SavedVariable.h"
 
 
 size_t SavedVariable::s_eeprom_index = 0;

@@ -12,8 +12,7 @@
 #include <EEPROM.h>
 #endif
 
-#include "Arduino.h"
-#include "Streaming.h"
+#include <Arduino.h>
 
 
 class SavedVariable
@@ -59,5 +58,5 @@ private:
   size_t array_length_max_at_construction_;
   size_t array_element_size_;
 };
-#include "SavedVariableDefinitions.h"
+#include "SavedVariable/SavedVariableDefinitions.h"
 #endif

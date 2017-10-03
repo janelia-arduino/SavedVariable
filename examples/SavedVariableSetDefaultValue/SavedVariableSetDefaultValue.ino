@@ -1,11 +1,11 @@
-#include "Arduino.h"
-#include "Streaming.h"
+#include <Arduino.h>
+#include <Streaming.h>
 #ifndef ARDUINO_SAM_DUE
 #include <EEPROM.h>
 #endif
-#include "SavedVariable.h"
+#include <SavedVariable.h>
 
-const size_t BAUDRATE = 115200;
+const long BAUDRATE = 115200;
 
 const size_t ONE_D_ARRAY_DEFAULT_VALUE_0[] = {10,11,12,13};
 const size_t ONE_D_ARRAY_DEFAULT_VALUE_1[] = {100,110};

@@ -1,12 +1,12 @@
-#include "Arduino.h"
-#include "Streaming.h"
+#include <Arduino.h>
+#include <Streaming.h>
 #ifndef ARDUINO_SAM_DUE
 #include <EEPROM.h>
 #endif
-#include "SavedVariable.h"
+#include <SavedVariable.h>
 
 
-const size_t BAUDRATE = 115200;
+const long BAUDRATE = 115200;
 
 const int EEPROM_INITIALIZED_VALUE = 99;
 const int SIMPLE_INT_DEFAULT_VALUE = 4567;
