@@ -31,6 +31,11 @@ void setup()
   size_t bytes_written = 0;
   size_t one_d_array_element;
 
+  Serial << "Setting values to default!" << endl;
+  eeprom_initialized_sv.setValueToDefault();
+  one_d_array_sv.setValueToDefault();
+  one_d_array_doubled_sv.setValueToDefault();
+
   for (size_t i=0;i<2;++i)
   {
     size_t eeprom_initial_value;
@@ -38,7 +43,7 @@ void setup()
     Serial << "eeprom_intial_value = " << eeprom_initial_value << " should be = " << EEPROM_INITIALIZED_VALUE << endl;
     if (eeprom_initial_value != EEPROM_INITIALIZED_VALUE)
     {
-      Serial << "Default values set for the first time!" << endl;
+      Serial << "Setting values to default!" << endl;
       eeprom_initialized_sv.setValueToDefault();
       one_d_array_sv.setValueToDefault();
       one_d_array_doubled_sv.setValueToDefault();
