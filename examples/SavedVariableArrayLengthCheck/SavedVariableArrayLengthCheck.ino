@@ -1,8 +1,6 @@
 #include <Arduino.h>
 #include <Streaming.h>
-#ifndef ARDUINO_SAM_DUE
 #include <EEPROM.h>
-#endif
 #include <SavedVariable.h>
 
 
@@ -59,6 +57,10 @@ void setup()
     }
 
     size_t array_length_test = 2;
+    if (i == 1)
+    {
+      array_length_test = 0;
+    }
     Serial << "one_d_array_sv.setArrayLength(" << array_length_test << ")" << endl;
     one_d_array_sv.setArrayLength(array_length_test);
     Serial << "one_d_array_sv.getArrayLength() = " << one_d_array_sv.getArrayLength() << endl;

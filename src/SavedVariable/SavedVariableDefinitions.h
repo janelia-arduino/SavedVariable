@@ -57,27 +57,6 @@ size_t SavedVariable::getDefaultValue(T & value)
 }
 
 template<typename T>
-size_t SavedVariable::getDefaultElementValue(const size_t element_index,
-                                             T & value)
-{
-  size_t i = 0;
-  if ((sizeof(value) == array_element_size_) &&
-      (element_index < array_length_default_))
-  {
-    byte * p = (byte *)(void *)&value;
-    byte * q = (byte *)(void *)default_value_ptr_ + element_index*array_element_size_;
-    for (i=0; i<array_element_size_; ++i)
-    {
-      if (i < size_)
-      {
-        *p++ = *q++;
-      }
-    }
-  }
-  return i;
-}
-
-template<typename T>
 bool SavedVariable::setDefaultValue(const T & default_value)
 {
   if (sizeof(default_value) == size_)
@@ -104,7 +83,43 @@ bool SavedVariable::setDefaultValue(const T (&default_value)[N],
   return false;
 }
 
-#ifndef ARDUINO_SAM_DUE
+template<typename T>
+size_t SavedVariable::getDefaultElementValue(const size_t element_index,
+                                             T & value)
+{
+  size_t i = 0;
+  if ((sizeof(value) == array_element_size_) &&
+      (element_index < array_length_max_))
+  {
+    byte * p = (byte *)(void *)&value;
+    byte * q = (byte *)(void *)default_value_ptr_ + element_index*array_element_size_;
+    for (i=0; i<array_element_size_; ++i)
+    {
+      if (i < size_)
+      {
+        *p++ = *q++;
+      }
+    }
+  }
+  return i;
+}
+
+template<typename T>
+size_t SavedVariable::getValue(T & value)
+{
+  size_t i = 0;
+  if (sizeof(value) == size_)
+  {
+    byte* p = (byte *)(void *)&value;
+    size_t ee = eeprom_index_;
+    for (i=0; i<size_; ++i)
+    {
+      *p++ = EEPROM.read(ee++);
+    }
+  }
+  return i;
+}
+
 template<typename T>
 size_t SavedVariable::setValue(const T & value)
 {
@@ -123,6 +138,27 @@ size_t SavedVariable::setValue(const T & value)
       else
       {
         EEPROM.write(ee++,*p++);
+      }
+    }
+  }
+  return i;
+}
+
+template<typename T>
+size_t SavedVariable::getElementValue(const size_t element_index,
+                                      T & value)
+{
+  size_t i = 0;
+  if ((sizeof(value) == array_element_size_) &&
+      (element_index < getArrayLength()))
+  {
+    byte * p = (byte *)(void *)&value;
+    size_t ee = eeprom_index_ + element_index*array_element_size_;
+    for (i=0; i<array_element_size_; ++i)
+    {
+      if (i < size_)
+      {
+        *p++ = EEPROM.read(ee++);
       }
     }
   }
@@ -154,73 +190,5 @@ size_t SavedVariable::setElementValue(const size_t element_index,
   }
   return i;
 }
-
-template<typename T>
-size_t SavedVariable::getValue(T & value)
-{
-  size_t i = 0;
-  if (sizeof(value) == size_)
-  {
-    byte* p = (byte *)(void *)&value;
-    size_t ee = eeprom_index_;
-    for (i=0; i<size_; ++i)
-    {
-      *p++ = EEPROM.read(ee++);
-    }
-  }
-  return i;
-}
-
-template<typename T>
-size_t SavedVariable::getElementValue(const size_t element_index,
-                                      T & value)
-{
-  size_t i = 0;
-  if ((sizeof(value) == array_element_size_) &&
-      (element_index < getArrayLength()))
-  {
-    byte * p = (byte *)(void *)&value;
-    size_t ee = eeprom_index_ + element_index*array_element_size_;
-    for (i=0; i<array_element_size_; ++i)
-    {
-      if (i < size_)
-      {
-        *p++ = EEPROM.read(ee++);
-      }
-    }
-  }
-  return i;
-}
-#else
-
-template<typename T>
-size_t SavedVariable::setValue(const T & value)
-{
-  size_t i = 0;
-  return i;
-}
-
-template<typename T>
-size_t SavedVariable::setElementValue(const size_t element_index,
-                                      const T & value)
-{
-  size_t i = 0;
-  return i;
-}
-
-template<typename T>
-size_t SavedVariable::getValue(T & value)
-{
-  return getDefaultValue(value);
-}
-
-template<typename T>
-size_t SavedVariable::getElementValue(const size_t element_index,
-                                      T & value)
-{
-  return getDefaultElementValue(element_index,value);
-}
-
-#endif
 
 #endif

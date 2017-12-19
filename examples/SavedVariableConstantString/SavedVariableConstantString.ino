@@ -1,8 +1,6 @@
 #include <Arduino.h>
 #include <Streaming.h>
-#ifndef ARDUINO_SAM_DUE
 #include <EEPROM.h>
-#endif
 #include <SavedVariable.h>
 #include <ConstantVariable.h>
 
