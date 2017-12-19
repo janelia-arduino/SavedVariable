@@ -41,19 +41,39 @@ SavedVariable::SavedVariable(const T (&default_value)[N],
 }
 
 template<typename T>
-size_t SavedVariable::getDefaultValue(T & value)
+size_t SavedVariable::getDefaultValue(T & default_value)
 {
-  size_t i = 0;
-  if (sizeof(value) == size_)
+  size_t byte_count = 0;
+  if (sizeof(default_value) == size_)
   {
-    byte * p = (byte *)(void *)&value;
+    byte * p = (byte *)(void *)&default_value;
     byte * q = (byte *)(void *)default_value_ptr_;
-    for (i=0; i<size_; ++i)
+    for (byte_count=0; byte_count<size_; ++byte_count)
     {
       *p++ = *q++;
     }
   }
-  return i;
+  return byte_count;
+}
+
+template<typename T, size_t N>
+size_t SavedVariable::getDefaultValue(T (&default_value)[N])
+{
+  size_t element_count = 0;
+  if (sizeof(T) == array_element_size_)
+  {
+    element_count = min(N,array_length_default_);
+    byte * p = (byte *)(void *)&default_value;
+    for (size_t element_index=0; element_index<element_count; ++element_index)
+    {
+      byte * q = (byte *)(void *)default_value_ptr_ + element_index*array_element_size_;
+      for (size_t i=0; i<array_element_size_; ++i)
+      {
+        *p++ = *q++;
+      }
+    }
+  }
+  return element_count;
 }
 
 template<typename T>
@@ -87,48 +107,68 @@ template<typename T>
 size_t SavedVariable::getDefaultElementValue(const size_t element_index,
                                              T & value)
 {
-  size_t i = 0;
+  size_t byte_count = 0;
   if ((sizeof(value) == array_element_size_) &&
       (element_index < array_length_max_))
   {
     byte * p = (byte *)(void *)&value;
     byte * q = (byte *)(void *)default_value_ptr_ + element_index*array_element_size_;
-    for (i=0; i<array_element_size_; ++i)
+    for (byte_count=0; byte_count<array_element_size_; ++byte_count)
     {
-      if (i < size_)
+      if (byte_count < size_)
       {
         *p++ = *q++;
       }
     }
   }
-  return i;
+  return byte_count;
 }
 
 template<typename T>
 size_t SavedVariable::getValue(T & value)
 {
-  size_t i = 0;
+  size_t byte_count = 0;
   if (sizeof(value) == size_)
   {
     byte* p = (byte *)(void *)&value;
     size_t ee = eeprom_index_;
-    for (i=0; i<size_; ++i)
+    for (byte_count=0; byte_count<size_; ++byte_count)
     {
       *p++ = EEPROM.read(ee++);
     }
   }
-  return i;
+  return byte_count;
+}
+
+template<typename T, size_t N>
+size_t SavedVariable::getValue(T (&value)[N])
+{
+  size_t element_count = 0;
+  if (sizeof(T) == array_element_size_)
+  {
+    element_count = min(N,getArrayLength());
+    byte * p = (byte *)(void *)&value;
+    for (size_t element_index=0; element_index<element_count; ++element_index)
+    {
+      size_t ee = eeprom_index_ + element_index*array_element_size_;
+      for (size_t i=0; i<array_element_size_; ++i)
+      {
+        *p++ = EEPROM.read(ee++);
+      }
+    }
+  }
+  return element_count;
 }
 
 template<typename T>
 size_t SavedVariable::setValue(const T & value)
 {
-  size_t i = 0;
+  size_t byte_count = 0;
   if (sizeof(value) == size_)
   {
     const byte * p = (const byte *)(const void *)&value;
     size_t ee = eeprom_index_;
-    for (i=0; i<size_; ++i)
+    for (byte_count=0; byte_count<size_; ++byte_count)
     {
       if(EEPROM.read(ee) == *p)
       {
@@ -141,41 +181,73 @@ size_t SavedVariable::setValue(const T & value)
       }
     }
   }
-  return i;
+  return byte_count;
+}
+
+template<typename T, size_t N>
+size_t SavedVariable::setValue(const T (&value)[N],
+                               const size_t array_length)
+{
+  size_t element_count = 0;
+  if ((N <= array_length_max_) &&
+      (sizeof(T) == array_element_size_))
+  {
+    element_count = min(N,array_length_max_);
+    element_count = min(element_count,array_length);
+    byte * p = (byte *)(void *)&value;
+    for (size_t element_index=0; element_index<element_count; ++element_index)
+    {
+      size_t ee = eeprom_index_ + element_index*array_element_size_;
+      for (size_t i=0; i<array_element_size_; ++i)
+      {
+        if(EEPROM.read(ee) == *p)
+        {
+          ee++;
+          p++;
+        }
+        else
+        {
+          EEPROM.write(ee++,*p++);
+        }
+      }
+    }
+    setArrayLength(element_count);
+  }
+  return element_count;
 }
 
 template<typename T>
 size_t SavedVariable::getElementValue(const size_t element_index,
                                       T & value)
 {
-  size_t i = 0;
+  size_t byte_count = 0;
   if ((sizeof(value) == array_element_size_) &&
       (element_index < getArrayLength()))
   {
     byte * p = (byte *)(void *)&value;
     size_t ee = eeprom_index_ + element_index*array_element_size_;
-    for (i=0; i<array_element_size_; ++i)
+    for (byte_count=0; byte_count<array_element_size_; ++byte_count)
     {
-      if (i < size_)
+      if (byte_count < size_)
       {
         *p++ = EEPROM.read(ee++);
       }
     }
   }
-  return i;
+  return byte_count;
 }
 
 template<typename T>
 size_t SavedVariable::setElementValue(const size_t element_index,
                                       const T & value)
 {
-  size_t i = 0;
+  size_t byte_count = 0;
   if ((sizeof(value) == array_element_size_) &&
       (element_index < getArrayLength()))
   {
     const byte * p = (const byte *)(const void *)&value;
     size_t ee = eeprom_index_ + element_index*array_element_size_;
-    for (i=0; i<array_element_size_; ++i)
+    for (byte_count=0; byte_count<array_element_size_; ++byte_count)
     {
       if(EEPROM.read(ee)==*p)
       {
@@ -188,7 +260,7 @@ size_t SavedVariable::setElementValue(const size_t element_index,
       }
     }
   }
-  return i;
+  return byte_count;
 }
 
 #endif

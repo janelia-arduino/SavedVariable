@@ -22,7 +22,9 @@ public:
                 const size_t array_length_default=N);
 
   template<typename T>
-  size_t getDefaultValue(T & value);
+  size_t getDefaultValue(T & default_value);
+  template<typename T, size_t N>
+  size_t getDefaultValue(T (&default_value)[N]);
   template<typename T>
   bool setDefaultValue(const T & default_value);
   template<typename T, size_t N>
@@ -35,8 +37,13 @@ public:
 
   template<typename T>
   size_t getValue(T & value);
+  template<typename T, size_t N>
+  size_t getValue(T (&value)[N]);
   template<typename T>
   size_t setValue(const T &value);
+  template<typename T, size_t N>
+  size_t setValue(const T (&value)[N],
+                  const size_t array_length=N);
 
   template<typename T>
   size_t getElementValue(const size_t element_index,
