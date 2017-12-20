@@ -105,20 +105,17 @@ bool SavedVariable::setDefaultValue(const T (&default_value)[N],
 
 template<typename T>
 size_t SavedVariable::getDefaultElementValue(const size_t element_index,
-                                             T & value)
+                                             T & default_element_value)
 {
   size_t byte_count = 0;
-  if ((sizeof(value) == array_element_size_) &&
-      (element_index < array_length_max_))
+  if ((sizeof(default_element_value) == array_element_size_) &&
+      (element_index < array_length_default_))
   {
-    byte * p = (byte *)(void *)&value;
+    byte * p = (byte *)(void *)&default_element_value;
     byte * q = (byte *)(void *)default_value_ptr_ + element_index*array_element_size_;
     for (byte_count=0; byte_count<array_element_size_; ++byte_count)
     {
-      if (byte_count < size_)
-      {
-        *p++ = *q++;
-      }
+      *p++ = *q++;
     }
   }
   return byte_count;
@@ -216,20 +213,17 @@ size_t SavedVariable::setValue(const T (&value)[N],
 
 template<typename T>
 size_t SavedVariable::getElementValue(const size_t element_index,
-                                      T & value)
+                                      T & element_value)
 {
   size_t byte_count = 0;
-  if ((sizeof(value) == array_element_size_) &&
+  if ((sizeof(element_value) == array_element_size_) &&
       (element_index < getArrayLength()))
   {
-    byte * p = (byte *)(void *)&value;
+    byte * p = (byte *)(void *)&element_value;
     size_t ee = eeprom_index_ + element_index*array_element_size_;
     for (byte_count=0; byte_count<array_element_size_; ++byte_count)
     {
-      if (byte_count < size_)
-      {
-        *p++ = EEPROM.read(ee++);
-      }
+      *p++ = EEPROM.read(ee++);
     }
   }
   return byte_count;
@@ -237,13 +231,13 @@ size_t SavedVariable::getElementValue(const size_t element_index,
 
 template<typename T>
 size_t SavedVariable::setElementValue(const size_t element_index,
-                                      const T & value)
+                                      const T & element_value)
 {
   size_t byte_count = 0;
-  if ((sizeof(value) == array_element_size_) &&
+  if ((sizeof(element_value) == array_element_size_) &&
       (element_index < getArrayLength()))
   {
-    const byte * p = (const byte *)(const void *)&value;
+    const byte * p = (const byte *)(const void *)&element_value;
     size_t ee = eeprom_index_ + element_index*array_element_size_;
     for (byte_count=0; byte_count<array_element_size_; ++byte_count)
     {
