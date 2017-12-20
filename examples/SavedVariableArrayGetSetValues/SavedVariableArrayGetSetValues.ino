@@ -45,6 +45,7 @@ void setup()
   Array<size_t,ONE_D_ARRAY_DEFAULT_ELEMENT_COUNT> default_value_array;
   default_value_array.assign(element_count,default_value);
   Serial << "default_value_array = " << default_value_array << endl;
+  Serial << endl;
 
   Serial << "one_d_array_sv.setValue(ONE_D_ARRAY_VALUE)" << endl;
   one_d_array_sv.setValue(ONE_D_ARRAY_VALUE);
@@ -60,11 +61,34 @@ void setup()
   Serial << "element_count = " << element_count << endl;
   for (size_t i=0; i<element_count; ++i)
   {
-    Serial << "value[" << i << "] = " << value[i] << " should be == " << ONE_D_ARRAY_VALUE[i] << endl;
+    Serial << "value[" << i << "] = " << value[i] << " should be != " << ONE_D_ARRAY_DEFAULT_VALUE[i] << endl;
   }
   Array<size_t,ONE_D_ARRAY_DEFAULT_ELEMENT_COUNT> value_array;
   value_array.assign(element_count,value);
   Serial << "value_array = " << value_array << endl;
+  Serial << endl;
+
+  Serial << "one_d_array_sv.setArrayLength(" << ONE_D_ARRAY_ELEMENT_COUNT << ")" << endl;
+  one_d_array_sv.setArrayLength(ONE_D_ARRAY_ELEMENT_COUNT);
+  Serial << "one_d_array_sv.setValue(ONE_D_ARRAY_VALUE)" << endl;
+  one_d_array_sv.setValue(ONE_D_ARRAY_VALUE);
+  size = one_d_array_sv.getSize();
+  array_length = one_d_array_sv.getArrayLength();
+  array_length_max = one_d_array_sv.getArrayLengthMax();
+  Serial << "one_d_array_sv.getSize() = " << size << endl;
+  Serial << "one_d_array_sv.getArrayLength() = " << array_length << endl;
+  Serial << "one_d_array_sv.getArrayLengthMax() = " << array_length_max << endl;
+
+  element_count = one_d_array_sv.getValue(value);
+  Serial << "element_count = " << element_count << endl;
+  for (size_t i=0; i<element_count; ++i)
+  {
+    Serial << "value[" << i << "] = " << value[i] << " should be == " << ONE_D_ARRAY_VALUE[i] << endl;
+  }
+  value_array.assign(element_count,value);
+  Serial << "value_array = " << value_array << endl;
+  Serial << endl;
+
 }
 
 

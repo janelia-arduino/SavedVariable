@@ -189,11 +189,10 @@ size_t SavedVariable::setValue(const T (&value)[N],
                                const size_t array_length)
 {
   size_t element_count = 0;
-  if ((N <= array_length_max_) &&
+  if ((array_length == getArrayLength()) &&
       (sizeof(T) == array_element_size_))
   {
-    element_count = min(N,array_length_max_);
-    element_count = min(element_count,array_length);
+    element_count = array_length;
     byte * p = (byte *)(void *)&value;
     for (size_t element_index=0; element_index<element_count; ++element_index)
     {
@@ -211,7 +210,6 @@ size_t SavedVariable::setValue(const T (&value)[N],
         }
       }
     }
-    setArrayLength(element_count);
   }
   return element_count;
 }
