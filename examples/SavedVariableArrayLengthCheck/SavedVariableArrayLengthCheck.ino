@@ -4,7 +4,7 @@
 #include <SavedVariable.h>
 
 
-const long BAUDRATE = 115200;
+const long BAUD = 115200;
 
 const size_t EEPROM_INITIALIZED_VALUE = 123;
 
@@ -16,7 +16,7 @@ void setup()
 {
   while (!Serial);
 
-  Serial.begin(BAUDRATE);
+  Serial.begin(BAUD);
   Serial.flush();
 
   SavedVariable eeprom_initialized_sv(EEPROM_INITIALIZED_VALUE);

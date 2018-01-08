@@ -5,7 +5,7 @@
 #include <ConstantVariable.h>
 
 
-const long BAUDRATE = 115200;
+const long BAUD = 115200;
 
 union SubsetMemberType
 {
@@ -31,7 +31,7 @@ void setup()
 {
   while (!Serial);
 
-  Serial.begin(BAUDRATE);
+  Serial.begin(BAUD);
   Serial.flush();
 
   SavedVariable eeprom_initialized_sv(EEPROM_INITIALIZED_VALUE);

@@ -3,7 +3,7 @@
 #include <EEPROM.h>
 #include <SavedVariable.h>
 
-const long BAUDRATE = 115200;
+const long BAUD = 115200;
 
 const size_t ONE_D_ARRAY_DEFAULT_VALUE_0[] = {10,11,12,13};
 const size_t ONE_D_ARRAY_DEFAULT_VALUE_1[] = {100,110};
@@ -14,7 +14,7 @@ void setup()
 {
   while (!Serial);
 
-  Serial.begin(BAUDRATE);
+  Serial.begin(BAUD);
   Serial.flush();
 
   SavedVariable one_d_array_sv(ONE_D_ARRAY_DEFAULT_VALUE_0);

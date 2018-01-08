@@ -5,7 +5,7 @@
 #include <Array.h>
 
 
-const long BAUDRATE = 115200;
+const long BAUD = 115200;
 
 const size_t ONE_D_ARRAY_DEFAULT_ELEMENT_COUNT = 4;
 const size_t ONE_D_ARRAY_DEFAULT_VALUE[ONE_D_ARRAY_DEFAULT_ELEMENT_COUNT] = {100,110,120,130};
@@ -17,7 +17,7 @@ void setup()
 {
   while (!Serial);
 
-  Serial.begin(BAUDRATE);
+  Serial.begin(BAUD);
   Serial.flush();
 
   SavedVariable one_d_array_sv(ONE_D_ARRAY_DEFAULT_VALUE,ONE_D_ARRAY_DEFAULT_LENGTH);
