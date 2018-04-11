@@ -1,0 +1,17 @@
+#+TITLE: SavedVariable
+#+AUTHOR: Peter Polidoro
+#+EMAIL: peterpolidoro@gmail.com
+
+* Library Information
+  - Author :: Peter Polidoro
+  - License :: BSD
+
+  Save arbitrary variable types into Arduino EEPROM.
+
+* Library Examples
+
+  [[./examples]]
+
+* Library Dependencies
+
+  [[https://github.com/janelia-arduino/arduino-libraries][arduino-libraries]]
