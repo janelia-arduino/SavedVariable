@@ -19,7 +19,7 @@ public:
   SavedVariable(const T & default_value);
   template<typename T, size_t N>
   SavedVariable(const T (&default_value)[N],
-                const size_t array_length_default=N);
+    const size_t array_length_default=N);
 
   template<typename T>
   size_t getDefaultValue(T & default_value);
@@ -29,11 +29,11 @@ public:
   bool setDefaultValue(const T & default_value);
   template<typename T, size_t N>
   bool setDefaultValue(const T (&default_value)[N],
-                       const size_t array_length_default=N);
+    const size_t array_length_default=N);
 
   template<typename T>
   size_t getDefaultElementValue(const size_t element_index,
-                                T & default_element_value);
+    T & default_element_value);
 
   template<typename T>
   size_t getValue(T & value);
@@ -43,14 +43,14 @@ public:
   size_t setValue(const T &value);
   template<typename T, size_t N>
   size_t setValue(const T (&value)[N],
-                  const size_t array_length=N);
+    const size_t array_length=N);
 
   template<typename T>
   size_t getElementValue(const size_t element_index,
-                         T & element_value);
+    T & element_value);
   template<typename T>
   size_t setElementValue(const size_t element_index,
-                         const T & element_value);
+    const T & element_value);
 
   void setValueToDefault();
   bool valueIsDefault();

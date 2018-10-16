@@ -20,11 +20,11 @@ CONSTANT_STRING(mode_rising,"RISING");
 CONSTANT_STRING(mode_falling,"FALLING");
 CONSTANT_STRING(mode_change,"CHANGE");
 const SubsetMemberType mode_ptr_subset[MODE_SUBSET_LENGTH] =
-  {
-    {.cs_ptr=&mode_rising},
-    {.cs_ptr=&mode_falling},
-    {.cs_ptr=&mode_change},
-  };
+{
+  {.cs_ptr=&mode_rising},
+  {.cs_ptr=&mode_falling},
+  {.cs_ptr=&mode_change},
+};
 const ConstantString * const mode_ptr_default = &mode_rising;
 
 void setup()

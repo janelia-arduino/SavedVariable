@@ -24,7 +24,7 @@ SavedVariable::SavedVariable(const T & default_value)
 
 template<typename T, size_t N>
 SavedVariable::SavedVariable(const T (&default_value)[N],
-                             const size_t array_length_default)
+  const size_t array_length_default)
 {
   array_element_size_ = sizeof(T);
   array_length_default_ = array_length_default;
@@ -89,10 +89,10 @@ bool SavedVariable::setDefaultValue(const T & default_value)
 
 template<typename T, size_t N>
 bool SavedVariable::setDefaultValue(const T (&default_value)[N],
-                                    const size_t array_length_default)
+  const size_t array_length_default)
 {
   if ((N <= array_length_max_at_construction_) &&
-      (sizeof(T) == array_element_size_))
+    (sizeof(T) == array_element_size_))
   {
     array_length_max_ = N;
     setArrayLengthDefault(array_length_default);
@@ -105,11 +105,11 @@ bool SavedVariable::setDefaultValue(const T (&default_value)[N],
 
 template<typename T>
 size_t SavedVariable::getDefaultElementValue(const size_t element_index,
-                                             T & default_element_value)
+  T & default_element_value)
 {
   size_t byte_count = 0;
   if ((sizeof(default_element_value) == array_element_size_) &&
-      (element_index < array_length_default_))
+    (element_index < array_length_default_))
   {
     byte * p = (byte *)(void *)&default_element_value;
     byte * q = (byte *)(void *)default_value_ptr_ + element_index*array_element_size_;
@@ -183,11 +183,11 @@ size_t SavedVariable::setValue(const T & value)
 
 template<typename T, size_t N>
 size_t SavedVariable::setValue(const T (&value)[N],
-                               const size_t array_length)
+  const size_t array_length)
 {
   size_t element_count = 0;
   if ((array_length == getArrayLength()) &&
-      (sizeof(T) == array_element_size_))
+    (sizeof(T) == array_element_size_))
   {
     element_count = array_length;
     byte * p = (byte *)(void *)&value;
@@ -213,11 +213,11 @@ size_t SavedVariable::setValue(const T (&value)[N],
 
 template<typename T>
 size_t SavedVariable::getElementValue(const size_t element_index,
-                                      T & element_value)
+  T & element_value)
 {
   size_t byte_count = 0;
   if ((sizeof(element_value) == array_element_size_) &&
-      (element_index < getArrayLength()))
+    (element_index < getArrayLength()))
   {
     byte * p = (byte *)(void *)&element_value;
     size_t ee = eeprom_index_ + element_index*array_element_size_;
@@ -231,11 +231,11 @@ size_t SavedVariable::getElementValue(const size_t element_index,
 
 template<typename T>
 size_t SavedVariable::setElementValue(const size_t element_index,
-                                      const T & element_value)
+  const T & element_value)
 {
   size_t byte_count = 0;
   if ((sizeof(element_value) == array_element_size_) &&
-      (element_index < getArrayLength()))
+    (element_index < getArrayLength()))
   {
     const byte * p = (const byte *)(const void *)&element_value;
     size_t ee = eeprom_index_ + element_index*array_element_size_;

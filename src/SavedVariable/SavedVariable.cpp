@@ -112,7 +112,7 @@ bool SavedVariable::setArrayLength(const size_t array_length)
 {
   bool success = false;
   if ((array_length_max_at_construction_ > 0) &&
-      (array_length <= array_length_max_))
+    (array_length <= array_length_max_))
   {
     const byte * p = (const byte *)(const void *)&array_length;
     size_t ee = eeprom_index_ + array_length_max_at_construction_*array_element_size_;
