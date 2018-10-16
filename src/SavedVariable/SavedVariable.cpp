@@ -58,7 +58,7 @@ bool SavedVariable::valueIsDefault()
   return is_default;
 }
 
-void SavedVariable::setElementValueToDefault(const size_t element_index)
+void SavedVariable::setElementValueToDefault(size_t element_index)
 {
   if (element_index < array_length_max_)
   {
@@ -108,7 +108,7 @@ size_t SavedVariable::getArrayLength()
   return array_length;
 }
 
-bool SavedVariable::setArrayLength(const size_t array_length)
+bool SavedVariable::setArrayLength(size_t array_length)
 {
   bool success = false;
   if ((array_length_max_at_construction_ > 0) &&
@@ -149,7 +149,7 @@ size_t SavedVariable::getArrayLengthDefault()
   return array_length_default_;
 }
 
-void SavedVariable::setArrayLengthDefault(const size_t array_length_default)
+void SavedVariable::setArrayLengthDefault(size_t array_length_default)
 {
   array_length_default_ = array_length_default;
   if (array_length_default_ > array_length_max_)

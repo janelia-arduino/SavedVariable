@@ -17,57 +17,62 @@ public:
   SavedVariable();
   template<typename T>
   SavedVariable(const T & default_value);
-  template<typename T, size_t N>
+  template<typename T,
+    size_t N>
   SavedVariable(const T (&default_value)[N],
-    const size_t array_length_default=N);
+    size_t array_length_default=N);
 
   template<typename T>
   size_t getDefaultValue(T & default_value);
-  template<typename T, size_t N>
+  template<typename T,
+    size_t N>
   size_t getDefaultValue(T (&default_value)[N]);
   template<typename T>
   bool setDefaultValue(const T & default_value);
-  template<typename T, size_t N>
+  template<typename T,
+    size_t N>
   bool setDefaultValue(const T (&default_value)[N],
-    const size_t array_length_default=N);
+    size_t array_length_default=N);
 
   template<typename T>
-  size_t getDefaultElementValue(const size_t element_index,
+  size_t getDefaultElementValue(size_t element_index,
     T & default_element_value);
 
   template<typename T>
   size_t getValue(T & value);
-  template<typename T, size_t N>
+  template<typename T,
+    size_t N>
   size_t getValue(T (&value)[N]);
   template<typename T>
   size_t setValue(const T &value);
-  template<typename T, size_t N>
+  template<typename T,
+    size_t N>
   size_t setValue(const T (&value)[N],
-    const size_t array_length=N);
+    size_t array_length=N);
 
   template<typename T>
-  size_t getElementValue(const size_t element_index,
+  size_t getElementValue(size_t element_index,
     T & element_value);
   template<typename T>
-  size_t setElementValue(const size_t element_index,
+  size_t setElementValue(size_t element_index,
     const T & element_value);
 
   void setValueToDefault();
   bool valueIsDefault();
 
-  void setElementValueToDefault(const size_t element_index);
+  void setElementValueToDefault(size_t element_index);
 
   size_t getSize();
   size_t getArrayElementSize();
 
   size_t getArrayLength();
-  bool setArrayLength(const size_t array_length);
+  bool setArrayLength(size_t array_length);
 
   size_t getArrayLengthMax();
   void setArrayLengthToMax();
 
   size_t getArrayLengthDefault();
-  void setArrayLengthDefault(const size_t array_length_default);
+  void setArrayLengthDefault(size_t array_length_default);
   void setArrayLengthToDefault();
 
 private:
