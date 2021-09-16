@@ -3,7 +3,7 @@
 //
 //
 // Authors:
-// Peter Polidoro peterpolidoro@gmail.com
+// Peter Polidoro peter@polidoro.io
 // ----------------------------------------------------------------------------
 #ifndef SAVED_VARIABLE_DEFINITIONS_H
 #define SAVED_VARIABLE_DEFINITIONS_H
